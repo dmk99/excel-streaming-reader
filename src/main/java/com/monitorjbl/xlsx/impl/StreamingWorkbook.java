@@ -491,13 +491,19 @@ public class StreamingWorkbook implements Workbook, AutoCloseable {
     throw new UnsupportedOperationException();
   }
 
-  /**
-   * Not supported
-   */
-  @Override
-  public SheetVisibility getSheetVisibility(int i) {
-    throw new UnsupportedOperationException();
-  }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public SheetVisibility getSheetVisibility(int i) {
+		if (isSheetHidden(i)) {
+			return SheetVisibility.HIDDEN;
+		} else if (isSheetVeryHidden(i)) {
+			return SheetVisibility.VERY_HIDDEN;
+		} else {
+			return SheetVisibility.VISIBLE;
+		}
+	}
 
   /**
    * Not supported
